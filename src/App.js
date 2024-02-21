@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { useState } from 'react'
 
 
@@ -6,10 +6,11 @@ import React, { useState } from 'react'
 function App() {
  const [First, setFirst] = useState([])
   const data = async()=>{
-      const all = await axios.get('https://kavarindiabackend.vercel.app/data');
-      const json =  all.data.orders;
+      const all = await fetch('https://kavarindiabackend.vercel.app/data');
+      const dt = await all.json();
+      const json = dt.orders;
       console.log(json)
-    setFirst(json );
+    setFirst(json);
 
   }
 data();
