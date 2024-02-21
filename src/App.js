@@ -9,7 +9,7 @@ function App() {
       const all = await axios.get('https://kavarindiabackend.vercel.app/data');
       const json =  all.data.orders;
       console.log(json)
-    setFirst(json);
+    setFirst(json );
 
   }
 data();
