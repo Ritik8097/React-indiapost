@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import React, { useState } from 'react'
+
+
 
 function App() {
+ const [First, setFirst] = useState([])
+  const data = async()=>{
+      const all = await axios.get('https://kavarindiabackend.vercel.app/data');
+      const json =  all.data.orders;
+      console.log(json)
+    setFirst(json);
+
+  }
+data();
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   <div>
+   {
+    First.map((e,i)=>(
+      <table key={i} id="table1">
+                 
+ 
+  <tr key={i}>
+   
+ 
+
+ 
+    <td>{e.order_number}</td>
+    
+   
+    
+   
+    <td>{e.line_items[0].name}</td>
+    <td>{e.payment_gateway_names}</td>
+   
+     
+ 
+
+    <td>{e.tags}</td>
+    <td>{e.shipping_address.phone}</td>
+    <td>{e.current_total_price}</td>
+    <td>{e.shipping_address.first_name}</td>
+    <td>{e.shipping_address.address1} , {e.shipping_address.city}</td>
+   
+   
+  
+    </tr>
+
+   
+  </table>
+    ))
+   }
+   </div>
+  )
 }
 
-export default App;
+export default App
